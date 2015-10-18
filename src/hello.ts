@@ -8,19 +8,23 @@ import {HTTP_PROVIDERS} from 'angular2/http';
     providers: [TranslateService],
     template: `
         <h1>Hello, {{name}}!</h1>
-        Say {{ hello | translate }} to: <input [value]="name" (input)="name = $event.target.value">
+        Say {{ 'HELLO_KEY' | translate }} to: <input [value]="name" (input)="name = $event.target.value">
     `,
     pipes: [TranslatePipe]
 })
 export class HelloApp {
     name: string = 'World';
-    hello: string = 'HELLO';
 
     constructor(translate: TranslateService) {
+        // not required as "en" is the default
         translate.setDefault('en');
+
+        // we set the translations for english manually (instead of using a json file & the static loader)
         translate.setTranslation('en', {
-            'HELLO': 'hello'
+            'HELLO_KEY': 'hello'
         });
+        
+        // this trigger the use of the english language after setting the translations
         translate.use('en');
     }
 }

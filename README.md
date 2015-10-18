@@ -2,6 +2,8 @@
 
 A minimal [Angular2](https://angular.io/) playground using [TypeScript](http://www.typescriptlang.org/) and [SystemJS loader](https://github.com/systemjs/systemjs)
 
+This is a fork of ng2-play to demonstrate the use of [ng2-translate](https://github.com/ocombe/ng2-translate).
+
 ## Install
 
 Clone this repo and execute in your favourite shell:
