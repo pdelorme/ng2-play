@@ -5,7 +5,6 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 @Injectable()
 @Component({
     selector: 'hello-app',
-    providers: [TranslateService],
     template: `
         <h1>Hello, {{name}}!</h1>
         Say {{ 'HELLO_KEY' | translate }} to: <input [value]="name" (input)="name = $event.target.value">
@@ -23,10 +22,11 @@ export class HelloApp {
         translate.setTranslation('en', {
             'HELLO_KEY': 'hello'
         });
-        
+
         // this trigger the use of the english language after setting the translations
         translate.use('en');
     }
 }
 
-bootstrap(HelloApp, [HTTP_PROVIDERS]);
+// Instantiate TranslateService in the bootstrap so that we can keep it as a singleton
+bootstrap(HelloApp, [HTTP_PROVIDERS, TranslateService]);

@@ -7,3 +7,4 @@
 /// <reference path="../node_modules/angular2/typings/hammerjs/hammerjs.d.ts"/>
 /// <reference path="../node_modules/angular2/typings/jasmine/jasmine.d.ts"/>
 /// <reference path="../node_modules/reflect-metadata/reflect-metadata.d.ts" />
+/// <reference path="../node_modules/@reactivex/rxjs/dist/cjs/Rx.d.ts" />
