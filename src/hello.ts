@@ -5,7 +5,6 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 @Injectable()
 @Component({
     selector: 'hello-app',
-    providers: [TranslateService],
     template: `
         <h1>Hello, {{name}}!</h1>
         Say {{ 'HELLO_WORLD' | translate:'{value: "world"}' }} to: <input [value]="name" (input)="name = $event.target.value">
