@@ -1,4 +1,4 @@
-import {Component, bootstrap, Injectable} from 'angular2/angular2';
+import {Component, bootstrap, Injectable, NgFor} from 'angular2/angular2';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {HTTP_PROVIDERS} from 'angular2/http';
 
@@ -7,24 +7,37 @@ import {HTTP_PROVIDERS} from 'angular2/http';
     selector: 'hello-app',
     template: `
         <h1>Hello, {{name}}!</h1>
-        Say {{ 'HELLO_KEY' | translate }} to: <input [value]="name" (input)="name = $event.target.value">
+        Say {{ 'HELLO_WORLD' | translate:'{value: "world"}' }} to: <input [value]="name" (input)="name = $event.target.value">
+        <br/>
+        Change langage:
+        <select (change)="translate.use($event.target.value)">
+            <option *ng-for="#lang of translate.getLangs()" [selected]="lang === translate.currentLang">{{lang}}</option>
+        </select>
     `,
+    directives: [NgFor],
     pipes: [TranslatePipe]
 })
 export class HelloApp {
     name: string = 'World';
 
-    constructor(translate: TranslateService) {
+    constructor(public translate: TranslateService) {
         // not required as "en" is the default
         translate.setDefault('en');
 
         // we set the translations for english manually (instead of using a json file & the static loader)
         translate.setTranslation('en', {
-            'HELLO_KEY': 'hello'
+            'HELLO_WORLD': 'hello {{value}}'
         });
 
-        // this trigger the use of the english language after setting the translations
-        translate.use('en');
+        translate.setTranslation('fr', {
+            'HELLO_WORLD': 'bonjour {{value}}'
+        });
+
+        var userLang = navigator.language.split('-')[0]; // use navigator lang if available
+        userLang = /(fr|en)/gi.test(userLang) ? userLang : 'en';
+
+        // this trigger the use of the french or english language after setting the translations
+        translate.use(userLang);
     }
 }
 
