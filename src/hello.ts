@@ -22,7 +22,7 @@ export class HelloApp {
 
     constructor(public translate: TranslateService) {
         // not required as "en" is the default
-        translate.setDefault('en');
+        translate.setDefaultLang('en');
 
         // we set the translations for english manually (instead of using a json file & the static loader)
         translate.setTranslation('en', {
