@@ -12,14 +12,11 @@ gulp.task('clean', function (done) {
 
 gulp.task('ts2js', function () {
     var typescript = require('gulp-typescript');
-    var tsResult = gulp.src([PATHS.src, PATHS.typings])
-        .pipe(typescript({
-            noImplicitAny: true,
-            module: 'system',
-            target: 'ES5',
-            emitDecoratorMetadata: true,
-            experimentalDecorators: true
-        }));
+    var tscConfig = require('./tsconfig.json');
+
+    var tsResult = gulp
+        .src(PATHS.src)
+        .pipe(typescript(tscConfig.compilerOptions));
 
     return tsResult.js.pipe(gulp.dest('dist'));
 });
