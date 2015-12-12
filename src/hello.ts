@@ -8,7 +8,7 @@ import {HTTP_PROVIDERS} from 'angular2/http';
     selector: 'hello-app',
     template: `
         <h1>Hello, {{name}}!</h1>
-        Say {{ 'HELLO_WORLD' | translate:'{value: "world"}' }} to: <input [value]="name" (input)="name = $event.target.value">
+        Say "<b>{{ 'HELLO_WORLD' | translate:'{value: "world"}' }}</b>" to: <input [value]="name" (input)="name = $event.target.value">
         <br/>
         Change langage:
         <select (change)="translate.use($event.target.value)">
