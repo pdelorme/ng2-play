@@ -1,4 +1,5 @@
-import {Component, bootstrap, Injectable, NgFor} from 'angular2/angular2';
+import {Component, Injectable} from 'angular2/core';
+import {bootstrap} from 'angular2/platform/browser';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 import {HTTP_PROVIDERS} from 'angular2/http';
 
@@ -11,10 +12,9 @@ import {HTTP_PROVIDERS} from 'angular2/http';
         <br/>
         Change langage:
         <select (change)="translate.use($event.target.value)">
-            <option *ng-for="#lang of translate.getLangs()" [selected]="lang === translate.currentLang">{{lang}}</option>
+            <option *ngFor="#lang of translate.getLangs()" [selected]="lang === translate.currentLang">{{lang}}</option>
         </select>
     `,
-    directives: [NgFor],
     pipes: [TranslatePipe]
 })
 export class HelloApp {
