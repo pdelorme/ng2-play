@@ -10,9 +10,9 @@
 </body>
 
 <!-- ES6-related imports -->
+<script src="/node_modules/angular2/bundles/angular2-polyfills.js"></script>
 <script src="/node_modules/es6-shim/es6-shim.min.js"></script>
 <script src="/node_modules/systemjs/dist/system.src.js"></script>
-<script src="/node_modules/angular2/bundles/angular2.js"></script>
 <script src="/node_modules/angular2/bundles/http.min.js"></script>
 
 <script>
@@ -28,7 +28,8 @@
         }
     });
 </script>
-
+<script src="/node_modules/rxjs/bundles/Rx.js"></script>
+<script src="/node_modules/angular2/bundles/angular2.js"></script>
 <script>
     //bootstrap the Angular2 application
     System.import('dist/hello').catch(console.log.bind(console));
