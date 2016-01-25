@@ -24,15 +24,6 @@ export class HelloApp {
         // not required as "en" is the default
         translate.setDefaultLang('en');
 
-        // we set the translations for english manually (instead of using a json file & the static loader)
-        /*translate.setTranslation('en', {
-            'HELLO_WORLD': 'hello {{value}}'
-        });
-
-        translate.setTranslation('fr', {
-            'HELLO_WORLD': 'bonjour {{value}}'
-        });*/
-
         var userLang = navigator.language.split('-')[0]; // use navigator lang if available
         userLang = /(an|en)/gi.test(userLang) ? userLang : 'en';
 
