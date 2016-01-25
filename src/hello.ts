@@ -7,39 +7,42 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 @Component({
     selector: 'hello-app',
     template: `
-        <h1>Hello, {{name}}!</h1>
-        Say "<b>{{ 'HELLO_WORLD' | translate:'{value: "world"}' }}</b>" to: <input [value]="name" (input)="name = $event.target.value">
+        Copyright: "<b>{{ 'FOOTER.COPYRIGHT' | translate:{version: version} }}</b>"
         <br/>
         Change langage:
         <select (change)="translate.use($event.target.value)">
-            <option *ngFor="#lang of translate.getLangs()" [selected]="lang === translate.currentLang">{{lang}}</option>
+            <option *ngFor="#lang of languages" [selected]="lang === translate.currentLang">{{lang}}</option>
         </select>
     `,
     pipes: [TranslatePipe]
 })
 export class HelloApp {
-    name: string = 'World';
+    version: string = '1.0.0';
+    languages: Array = ['en', 'an'];
 
     constructor(public translate: TranslateService) {
         // not required as "en" is the default
         translate.setDefaultLang('en');
 
         // we set the translations for english manually (instead of using a json file & the static loader)
-        translate.setTranslation('en', {
+        /*translate.setTranslation('en', {
             'HELLO_WORLD': 'hello {{value}}'
         });
 
         translate.setTranslation('fr', {
             'HELLO_WORLD': 'bonjour {{value}}'
-        });
+        });*/
 
         var userLang = navigator.language.split('-')[0]; // use navigator lang if available
-        userLang = /(fr|en)/gi.test(userLang) ? userLang : 'en';
+        userLang = /(an|en)/gi.test(userLang) ? userLang : 'en';
 
-        // this trigger the use of the french or english language after setting the translations
+        // Use a static file
+        translate.useStaticFilesLoader("i18n", ".json");
+
+        // this trigger the use of the userLang language after setting the translations
         translate.use(userLang);
     }
 }
 
 // Instantiate TranslateService in the bootstrap so that we can keep it as a singleton
-bootstrap(HelloApp, [HTTP_PROVIDERS, TranslateService]);
+bootstrap(HelloApp, [TranslateService, HTTP_PROVIDERS]);
