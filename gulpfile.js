@@ -25,7 +25,6 @@ gulp.task('play', ['ts2js'], function () {
     var http = require('http');
     var connect = require('connect');
     var serveStatic = require('serve-static');
-    var open = require('open');
 
     var port = 9000, app;
 
@@ -33,7 +32,7 @@ gulp.task('play', ['ts2js'], function () {
 
     app = connect().use(serveStatic(__dirname));
     http.createServer(app).listen(port, function () {
-        open('http://localhost:' + port);
+        console.log('You can go to http://localhost:' + port);
     });
 });
 
